@@ -4,7 +4,7 @@ h-header bg-header
 ">
     <img class="max-h-full" src="{{asset("/images/logo.png")}}" alt="logo">
 
-    <h1 class=" text-3xl xl:text-5xl text-titulo">{{__("GESTION DE INSTITUTO")}}</h1>
+    <h1 class=" text-3xl xl:text-5xl text-titulo">{{__("School Management")}}</h1>
     <div class="space-x-2">
         <form action="{{route("set_lang")}}" method="POST">
             @csrf
@@ -32,7 +32,7 @@ h-header bg-header
             <span class="text-green-800 text-3xl">{{auth()->user()->name}}
             <form action="{{route("logout")}}" method="POST">
                 @csrf
-                <button class="btn btn-primary" type="submit">Logout</button>
+                <button class="btn btn-primary" type="submit">{{__('Logout')}}</button>
             </form>
 
         @endauth

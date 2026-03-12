@@ -7,7 +7,10 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LangController;
-
+// Recursos
+Route::resource('teachers', TeacherController::class);
+Route::resource('students', StudentController::class);
+Route::resource('projects', ProjectController::class);
 
 
 Route::get('/',[MainController::class,'index'])->name('main');

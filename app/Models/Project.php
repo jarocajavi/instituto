@@ -21,6 +21,10 @@ class Project extends Model
 
     //Espera tener los campos create_at y update_at
     public $timestamps = true;
+    static public function getLabels()
+    {
+        return __('projects');
+    }
 
 
 }

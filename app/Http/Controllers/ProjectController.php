@@ -14,7 +14,7 @@ class ProjectController extends Controller
     public function index()
     {
         //Obtener todos los proyectos
-        $projects = Project::all();
+        $projects = Project::paginate(5);
         $campos =
             [
             "name" => "Nombre",

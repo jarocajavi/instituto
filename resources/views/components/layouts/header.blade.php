@@ -11,9 +11,10 @@ h-header bg-header
             <select name="lang" id="lang"
                     onchange="this.form.submit()">
                 {{--            HAcer que el option sea un submit--}}
-                <option selected disabled>{{__("Selecciona idioma")}}</option>
                 @foreach(config("langs") as $lang => $detail)
-                    <option value="{{$lang}}">{{$detail['name']}}&nbsp&nbsp&nbsp {{$detail['flag']}}  </option>
+                    <option value="{{$lang}}" {{ app()->getLocale() == $lang ? 'selected' : '' }}>
+                        {{$detail['name']}} {{$detail['flag']}}
+                    </option>
                 @endforeach
             </select>
         </form>

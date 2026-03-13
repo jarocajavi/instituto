@@ -23,8 +23,8 @@ class TeacherFactory extends Factory
             "name" => $this->faker->name(),
             "email" => $this->faker->unique()->safeEmail(),
             "phone" => $this->faker->phoneNumber(),
-            "department" =>$department
-            //
+            "course" => $this->faker->randomElement(['1DAW', '2DAW', '1DAM', '2DAM']),
+            "birth_date" => $this->faker->date(),
         ];
     }
 }

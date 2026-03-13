@@ -9,7 +9,7 @@ class Student extends Model
 {
     /** @use HasFactory<\Database\Factories\StudentFactory> */
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'email', 'phone', 'course', 'birth_date'];
     static public function getLabels(){
         return __("students");
     }

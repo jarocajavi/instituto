@@ -14,8 +14,15 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::paginate(5);
-        $campos = Student::all();
+        $campos = [
+            "name" => "Nombre",
+            "email" => "Email",
+            "phone" => "Teléfono",
+            "course" => "Curso",
+            "birth_date" => "Fecha de nacimiento"
+        ];
         //
+        return view('students.index', compact('students', 'campos'));
     }
 
     /**
@@ -23,7 +30,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('students.create');
     }
 
     /**
@@ -31,7 +38,9 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        //
+        $datos = $request->input();
+        Student::create($datos);
+        return redirect()->route('students.index');
     }
 
     /**
@@ -39,7 +48,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return view('students.show', compact('student'));
     }
 
     /**
@@ -47,7 +56,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('students.edit', compact('student'));
     }
 
     /**
@@ -55,7 +64,9 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student)
     {
-        //
+        $datos = $request->input();
+        $student->update($datos);
+        return redirect()->route('students.index');
     }
 
     /**
@@ -63,6 +74,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->route('students.index');
     }
 }

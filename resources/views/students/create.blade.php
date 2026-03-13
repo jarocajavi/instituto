@@ -1,10 +1,7 @@
 <x-layouts.layout>
     <div class="flex justify-center items-center min-h-full bg-gray-200">
-        <form method="POST" onsubmit="return confirm('quieres actualizar este estudiante')"
-              action="{{ route('students.update', $student->id) }}?page={{request()->get('page')}}"
-              class="bg-white p-4 rounded-2xl">
+        <form method="POST" action="{{ route('students.store') }}" class="bg-white p-4 rounded-2xl">
             @csrf
-            @method('PATCH')
             <!-- Name -->
             <div>
                 <x-input-label for="name" :value="__('Name')" />
@@ -13,7 +10,7 @@
                     class="block mt-1 w-full"
                     type="text"
                     name="name"
-                    :value="$student->name"
+                    value="{{old('name')}}"
                     required
                 />
             </div>
@@ -25,7 +22,7 @@
                     class="block mt-1 w-full"
                     type="email"
                     name="email"
-                    :value="$student->email"
+                    value="{{old('email')}}"
                     required
                 />
             </div>
@@ -37,7 +34,7 @@
                     class="block mt-1 w-full"
                     type="text"
                     name="phone"
-                    :value="$student->phone"
+                    value="{{old('phone')}}"
                     required
                 />
             </div>
@@ -49,7 +46,7 @@
                     class="block mt-1 w-full"
                     type="text"
                     name="course"
-                    :value="$student->course"
+                    value="{{old('course')}}"
                     required
                 />
             </div>
@@ -61,16 +58,12 @@
                     class="block mt-1 w-full"
                     type="date"
                     name="birth_date"
-                    :value="$student->birth_date"
                 />
             </div>
-            <div class="flex justify-end mt-6 space-x-2">
+            <div class="flex justify-end mt-6">
                 <x-primary-button>
-                    {{ __('Update Student') }}
+                    {{ __('Create Student') }}
                 </x-primary-button>
-                <x-href-button href="{{route('students.index')}}">
-                    {{ __('Cancelar') }}
-                </x-href-button>
             </div>
         </form>
     </div>

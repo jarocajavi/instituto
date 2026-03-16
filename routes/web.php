@@ -58,3 +58,9 @@ Route::fallback(function () {
 // RUTAS ESPECIALES / UTILIDADES
 // ==========================================
 Route::post("set_lang",LangController::class)->name("set_lang");
+
+Route::resource("projects", ProjectController::class)->middleware('auth');
+Route::resource("teachers", ProjectController::class)->middleware('auth');
+Route::resource("students", ProjectController::class)->middleware('auth');
+Route::resource("registered", ProjectController::class)->middleware('auth');
+

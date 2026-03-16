@@ -13,11 +13,9 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+$teachers = User::role("teacher")->paginate(5);
+$campos = User::getLabel();
+
     protected $fillable = [
         'name',
         'email',

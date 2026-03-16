@@ -13,10 +13,10 @@ class TeacherController extends Controller
      */
     public function index(int $page = 1)
     {
-        $teachers = Teacher::paginate(5);
+        $teachers = User::role("teacher")->paginate(5);
         $campos = [
             "name"=> "Nombre",
-            "phone"=> "Telefono",
+            "phone"=> "Teléfono",
             "email"=> "Correo",
             "department"=> "Departamento",
         ];

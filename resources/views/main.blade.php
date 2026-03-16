@@ -2,7 +2,7 @@
     @guest
         <div
             class="hero min-h-full"
-            style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp);"
+            style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)"
         >
             <div class="hero-overlay"></div>
             <div class="hero-content text-neutral-content text-center">
@@ -20,29 +20,46 @@
         </div>
     @endguest
     @auth
-        <main class="lg:h-main bg-base-200
-                     grid gap-6 p-6
+        <div class="lg:h-main bg-base-200
+        grid
                      grid-cols-1
                      sm:grid-cols-2
                      lg:grid-cols-3
+                     gap-6 p-6
                      items-start
                      overflow-y-auto">
 
             {{-- Ejemplo de tarjetas --}}
             <x-card>
-                <x-slot name="label">Ver proyectos</x-slot>
-                <x-slot name="img">/images/projects.png</x-slot>
+                <x-slot name="label">{{__("Ver proyectos")}}</x-slot>
+                <x-slot name="img">{{asset('/images/projects.png')}}</x-slot>
                 <x-slot name="title">Gestión de Proyectos</x-slot>
                 <x-slot name="description">Vamos a ver un Crud con los proyectos</x-slot>
                 <x-slot name="ref">{{route("projects.index")}}</x-slot>
+
             </x-card>
-            <x-card label="Ver prouectos"
-                    img="/images/projects.png"
-                    title="Gestión de Proyectos"
-                    description="Vamos a ver un Crud de los proyectos"
-                    ref="{{route('projects.index')}}"></x-card>
 
+            <x-card :label="__('Ver Profesores')"
+                    :img="asset('/images/teachers.jpeg')"
+                    title="Gestión de Profesores"
+                    description="Vamos a ver un Crud de los Profesores"
+                    ref="{{route('teachers.index')}}" />
+            <x-card :label="__('Ver Estudiantes')"
+                    :img="asset('/images/student.jpeg')"
+                    title="Gestión de Estudiantes"
+                    description="Vamos a ver un Crud de los Estudiantes"
+                    ref="{{route('teachers.index')}}" />
+            <x-card :label="__('Ver  Registrados sin rol')"
+                    :img="asset('/images/registered.jpeg')"
+                    title="Gestión de Usuarios solo logueados sin rol"
+                    description="Vamos a ver un Crud de los logueados"
+                    ref="{{route('teachers.index')}}" />
+            <x-card :label="__('Ver  Usuarios')"
+                    :img="asset('/images/user.jpeg')"
+                    title="Gestión de todos los usuarios"
+                    description="Vamos a ver un Crud de los Usuarios"
+                    ref="{{route('teachers.index')}}" />
 
-        </main>
+        </div>
     @endauth
 </x-layouts.layout>

@@ -1,12 +1,7 @@
 <?php
 return [
-    'fields'=>[
-        'name'=>'Nombre',
-        'description'=>'Descripción',
-        'priority'=>'Prioridad',
-        'status'=>'Estado',
-    ],
-
-    'table'=>'Tareas',
-
+    'table'   => 'Tareas',
+    'created' => 'Tarea creada correctamente',
+    'updated' => 'Tarea actualizada correctamente',
+    'deleted' => 'Tarea eliminada correctamente',
 ];

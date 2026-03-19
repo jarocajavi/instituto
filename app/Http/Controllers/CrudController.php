@@ -2,84 +2,92 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class CrudController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(string $resource)
     {
-        //Recuperar todos los datos de resources del config
+        $config = config("resources.$resource");
+        $resource_name = $config['resource'] ?? $resource;
 
-        $config =config("resources.$resource");
-        $resource_name = $config['resource']??$resource;
+        $modelClass = "App\\Models\\" . Str::studly(Str::singular($resource));
 
-        //Resolvemos de forma dinámica el modelo
-        $model = "App\\Models\\".Str::studly(Str::singular($resourcename));
+        $query = $modelClass::query();
 
-        //Preparamos la consuta
-        $query = $model::query();
+        $rows = $query->paginate(10);
 
-        //Aplicamos el filtro de rol si tiene
-        if (isset($config['role']))
-            $query = $query->role("{$config['role']}");
-
-        $rows=$query->paginate(5);
-
-        $fields = $model::getFields();
+        $fields = $config['fields'] ?? [];
 
         $table = __("$resource.table");
-        return view('crud.index', compact('resource', 'rows', 'fields', 'table'));
 
-        //TODO Tener en cuanta los roles.
-
-
-
-
-
-        return "<h1>Voy a gestionar $resource</h1>";
-        //
+        return view('crud.index', compact('resource', 'rows', 'fields', 'table', 'resource_name'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(string $resource,Request $request)
+    public function create(string $resource)
     {
-        //
+        $config = config("resources.$resource");
+        $fields = $config['fields'] ?? [];
+        $resource_name = $config['resource'] ?? $resource;
+
+        return view('crud.create', compact('resource', 'fields', 'resource_name'));
     }
 
-    /**
-     * Display the specified resource.
-     */
+    public function store(string $resource, Request $request)
+    {
+        $modelClass = "App\\Models\\" . Str::studly(Str::singular($resource));
+        $config = config("resources.$resource");
+        $fields = $config['fields'] ?? [];
+
+        $data = $request->only(array_keys($fields));
+        $modelClass::create($data);
+
+        return redirect()->route('crud.index', $resource)
+            ->with('success', __("$resource.created"));
+    }
+
     public function show(string $resource, string $id)
     {
-        //
+        $modelClass = "App\\Models\\" . Str::studly(Str::singular($resource));
+        $config = config("resources.$resource");
+        $fields = $config['fields'] ?? [];
+        $resource_name = $config['resource'] ?? $resource;
+        $row = $modelClass::findOrFail($id);
+
+        return view('crud.show', compact('resource', 'row', 'fields', 'resource_name'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    public function edit(string $resource, string $id)
+    {
+        $modelClass = "App\\Models\\" . Str::studly(Str::singular($resource));
+        $config = config("resources.$resource");
+        $fields = $config['fields'] ?? [];
+        $resource_name = $config['resource'] ?? $resource;
+        $row = $modelClass::findOrFail($id);
+
+        return view('crud.edit', compact('resource', 'row', 'fields', 'resource_name'));
+    }
+
     public function update(string $resource, Request $request, string $id)
     {
-        //
+        $modelClass = "App\\Models\\" . Str::studly(Str::singular($resource));
+        $config = config("resources.$resource");
+        $fields = $config['fields'] ?? [];
+
+        $data = $request->only(array_keys($fields));
+        $modelClass::findOrFail($id)->update($data);
+
+        return redirect()->route('crud.index', $resource)
+            ->with('success', __("$resource.updated"));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $resource, int $id)
     {
-        $model = "App\\Models\\".Str::studly(Str::singular($resource));
-        $register = $model::find($id);
-        $register->delete();
-        return redirect(route("crud.index", $resource));
-        //TODO si es rol, tengo que buscar el modelo de ese rol
+        $modelClass = "App\\Models\\" . Str::studly(Str::singular($resource));
+        $modelClass::findOrFail($id)->delete();
 
-        //
+        return redirect()->route('crud.index', $resource)
+            ->with('success', __("$resource.deleted"));
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Project;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
 
-class ProjectSeeder extends Seeder
+class StudentSeeder extends Seeder
 {
     public function run(): void
     {
-        Project::factory(100)->create();
+        Student::factory(500)->create();
     }
 }

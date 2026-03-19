@@ -1,13 +1,7 @@
 <?php
 return [
-    'fields'=>[
-        'name'=>'Nombre',
-        'email'=>'Correo electrónico',
-        'dni'=>'DNI',
-        'phone'=>'Teléfono',
-        'password'=>'Contraseña',
-    ],
-
-    'table'=>'Estudiantes',
-
+    'table'   => 'Alumnos',
+    'created' => 'Alumno creado correctamente',
+    'updated' => 'Alumno actualizado correctamente',
+    'deleted' => 'Alumno eliminado correctamente',
 ];

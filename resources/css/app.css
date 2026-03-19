@@ -10,22 +10,27 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
-    /*    style="height:10vh"*/
-    --height-header:15vh;
-    --height-main:65vh;
-    --height-footer:10vh;
-    --height-nav:10vh;
 
-    /*    style="backgroud-color:#ffAAGG"*/
-    --color-header:#56D9E5;
-    --color-nav:#A4E0E6;
-    --color-main:#FFFFFF;
-    --color-footer:#000000;
-    --color-titulo:#8C1D07;
+    --height-header: 15vh;
+    --height-main:   70vh;
+    --height-footer: 10vh;
+    --height-nav:    10vh;
 
-
-
+    --color-header:  #1c1c1e;
+    --color-nav:     #2c2c2e;
+    --color-main:    #f4f4f5;
+    --color-footer:  #111111;
+    --color-titulo:  #f97316;
 }
-.boton{
-    @apply bg-amber-300 text-5xl
-}
+
+.bg-header  { background-color: var(--color-header); }
+.bg-nav     { background-color: var(--color-nav); }
+.bg-main    { background-color: var(--color-main); }
+.bg-footer  { background-color: var(--color-footer); }
+
+.h-header   { height: var(--height-header); }
+.h-nav      { height: var(--height-nav); }
+.h-main     { height: var(--height-main); }
+.h-footer   { height: var(--height-footer); }
+
+.text-titulo { color: var(--color-titulo); }

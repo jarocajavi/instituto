@@ -15,9 +15,15 @@
     @endguest
 
     @auth
-        @if(auth()->user()->hasRole('alumno'))
-            {{-- PANEL ALUMNO --}}
+        @if(auth()->user()->hasRole('alumno') || auth()->user()->hasRole('registrado'))
+            {{-- PANEL ALUMNO / REGISTRADO --}}
             <div class="max-w-2xl mx-auto">
+                @if(auth()->user()->hasRole('registrado'))
+                    <div class="bg-yellow-900/40 border border-yellow-600/50 rounded-xl p-5 mb-6 text-yellow-200">
+                        <h3 class="text-lg font-bold mb-2">⏳ Cuenta pendiente de aprobación</h3>
+                        <p class="text-sm text-yellow-300">Tu cuenta está registrada pero aún no ha sido activada por un administrador. Mientras tanto puedes revisar y actualizar tus datos de perfil.</p>
+                    </div>
+                @endif
                 <h2 class="text-2xl font-bold text-orange-400 mb-6">👤 Mi perfil</h2>
 
                 <div class="bg-zinc-800 rounded-xl border border-zinc-700 p-6 mb-6">
